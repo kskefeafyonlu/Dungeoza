@@ -45,6 +45,7 @@ public class EnemyHealth : MonoBehaviour
         {
             health = 0;
             isAlive = false;
+            Destroy(gameObject);
         }
         UpdateHealthBar();
     }

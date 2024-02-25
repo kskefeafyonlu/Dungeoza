@@ -10,12 +10,12 @@ public class PivotRotation : MonoBehaviour
     
 
     
-    void FixedUpdate()
-    {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        lookDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y).normalized;
+    // void FixedUpdate()
+    // {
+    //     mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //     lookDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y).normalized;
 
-        rotationDegrees = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
-    }
+    //     rotationDegrees = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+    //     transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
+    // }
 }
