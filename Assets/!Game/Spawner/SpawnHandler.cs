@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.Search;
@@ -35,29 +36,29 @@ public class SpawnHandler : MonoBehaviour
 
     public Transform[] spawnPositions;
 
+    private TextMeshProUGUI enemiesLeftText;
+    int enemiesLeft;
+
 
 
 
     private void Start() 
     {
         waveCountDown = timeBetweenWaves;
+        enemiesLeftText = GameObject.Find("EnemiesLeftText").GetComponent<TextMeshProUGUI>();
     }
 
 
     private void Update() 
     {
-
         waveCountDown-= Time.deltaTime;
 
         if (waveList[currentWaveIndex].state == WaveState.OnHold)
         {
-            
             //check if any enemies alive
             if(!CheckForAliveEnemies())
             {
-                
                 //next wave
-                
                 if(waveList.Length > currentWaveIndex+1)
                 {
                     waveList[currentWaveIndex].state = WaveState.Finished;
@@ -75,17 +76,11 @@ public class SpawnHandler : MonoBehaviour
             {
                 return;
             }
-            
         }
-        
-
-
         
 
         if (waveCountDown <= 0)
         {
-            
-
             if(waveList[currentWaveIndex].state == WaveState.NotStarted)
             {
                 StartCoroutine(StartWave(waveList[currentWaveIndex]));
@@ -98,15 +93,11 @@ public class SpawnHandler : MonoBehaviour
 
 
 
-    
-
-
-    
-
 
     IEnumerator StartWave(Wave wave)
     {
         wave.state = WaveState.Spawning;
+        enemiesLeftText.gameObject.SetActive(false);
 
         //Spawn
         for (int i = 0; i < wave.enemyAmount; i++)
@@ -124,26 +115,34 @@ public class SpawnHandler : MonoBehaviour
         yield break;
     }
 
+
+
+
+
     private float searchCountdown = 1f;
 
     private bool CheckForAliveEnemies()
     {
+        enemiesLeftText.gameObject.SetActive(true);
+        enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        enemiesLeftText.text = $"Enemies Left: {enemiesLeft}";
+
+
         searchCountdown -= Time.deltaTime;
+        
         if(searchCountdown <= 0f)
         {
-            
-            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+            if (enemiesLeft == 0)
             {
-                
                 searchCountdown = 1f;
                 return false;
             }
             searchCountdown = 1f;
         }
-
-        
         return true;
     }
+
+
 
 
 
