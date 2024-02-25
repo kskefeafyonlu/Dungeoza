@@ -17,6 +17,5 @@ public class PivotRotation : MonoBehaviour
 
         rotationDegrees = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
-        Debug.Log(rotationDegrees);
     }
 }

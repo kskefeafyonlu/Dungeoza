@@ -1,26 +1,156 @@
+using System.Collections;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 
 
 public class SpawnHandler : MonoBehaviour
 {
+    public enum WaveState
+    {
+        NotStarted,
+        Spawning,
+        OnHold,
+        Finished
+    }
+
+    [System.Serializable]
+    public class Wave
+    {
+        public WaveState state = WaveState.NotStarted;
+        public string waveName;
+        public GameObject[] enemyList;
+        public int enemyAmount;
+        public float spawnRate;
+    }
+
+    ///////////////////////
+
+    public Wave[] waveList;
+    private int currentWaveIndex = 0;
+
+    public float timeBetweenWaves = 5f;
+    public float waveCountDown;
+
+    public Transform[] spawnPositions;
+
+
+
+
+    private void Start() 
+    {
+        waveCountDown = timeBetweenWaves;
+    }
+
+
+    private void Update() 
+    {
+
+        waveCountDown-= Time.deltaTime;
+
+        if (waveList[currentWaveIndex].state == WaveState.OnHold)
+        {
+            
+            //check if any enemies alive
+            if(!CheckForAliveEnemies())
+            {
+                
+                //next wave
+                
+                if(waveList.Length > currentWaveIndex+1)
+                {
+                    waveList[currentWaveIndex].state = WaveState.Finished;
+                    currentWaveIndex += 1;
+                    waveCountDown = timeBetweenWaves;
+                    
+                }
+                else
+                {
+                    Debug.Log("Reached the end of waveslist");
+                }
+
+            }
+            else
+            {
+                return;
+            }
+            
+        }
+        
+
+
+        
+
+        if (waveCountDown <= 0)
+        {
+            
+
+            if(waveList[currentWaveIndex].state == WaveState.NotStarted)
+            {
+                StartCoroutine(StartWave(waveList[currentWaveIndex]));
+            }
+            
+        }
+    }
+
+
+
+
+
     
-}
-
-public class Wave : ScriptableObject
-{
-    [SerializeField] private WaveState state;
-    [SerializeField] private GameObject[] spawnList;
-    [SerializeField] private int spawnCount;
-    [SerializeField] private float spawnInterval;
 
 
+    
 
-}
 
-public enum WaveState
-{
-    Standby,
-    Spawning,
-    Ended,
-    Cooldown
+    IEnumerator StartWave(Wave wave)
+    {
+        wave.state = WaveState.Spawning;
+
+        //Spawn
+        for (int i = 0; i < wave.enemyAmount; i++)
+        {
+            SpawnRandomEnemy();
+            yield return new WaitForSeconds(wave.spawnRate);
+        }
+
+
+        wave.state = WaveState.OnHold;
+
+
+        //WaitForKills
+
+        yield break;
+    }
+
+    private float searchCountdown = 1f;
+
+    private bool CheckForAliveEnemies()
+    {
+        searchCountdown -= Time.deltaTime;
+        if(searchCountdown <= 0f)
+        {
+            
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+            {
+                
+                searchCountdown = 1f;
+                return false;
+            }
+            searchCountdown = 1f;
+        }
+
+        
+        return true;
+    }
+
+
+
+    private void SpawnRandomEnemy()
+    {
+        int randomEnemyIndex = waveList[currentWaveIndex].enemyList.Length;
+        Instantiate(waveList[currentWaveIndex].enemyList[UnityEngine.Random.Range(0, randomEnemyIndex)], spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Length)]);
+        Debug.Log("Spawning Random Enemy");
+    }
 }
