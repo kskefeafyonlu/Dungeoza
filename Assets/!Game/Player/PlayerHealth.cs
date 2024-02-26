@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
-            
+            //Gameover Screen
         }
         UpdateHealthBar();
     }
@@ -60,7 +60,4 @@ public class PlayerHealth : MonoBehaviour
         healthSlider.value = health/maxHealth;
         healthText.text = $"{health} | {maxHealth}";
     }
-
-    
-    
 }
