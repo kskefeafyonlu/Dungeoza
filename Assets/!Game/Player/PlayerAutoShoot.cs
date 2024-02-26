@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,7 +19,7 @@ public class PlayerAutoShoot : MonoBehaviour
 
     public GameObject bullet;
     public float cooldown = 1f;
-    private float countCool = 0f;
+    public float countCool = 0f;
     
         
 
@@ -63,8 +65,13 @@ public class PlayerAutoShoot : MonoBehaviour
     {
         Vector2 dir2target = new Vector2(targetTransform.position.x - transform.position.x, targetTransform.position.y - transform.position.y);
         
-        var bulletObject = Instantiate(bullet.gameObject, transform.position, transform.rotation);
-        bulletObject.GetComponent<Rigidbody2D>().velocity = dir2target * bullet.GetComponent<Bullet>().speed;
+        float rotDegrees = Mathf.Atan2(dir2target.y, dir2target.x) * Mathf.Rad2Deg;
+
+        var bulletObject = Instantiate(bullet.gameObject, transform.position, Quaternion.identity);
+
+        bulletObject.transform.rotation = Quaternion.Euler(0, 0, rotDegrees);
+        bulletObject.GetComponent<Rigidbody2D>().velocity = dir2target.normalized * bullet.GetComponent<Bullet>().speed;
+
     }
 
 
@@ -75,6 +82,7 @@ public class PlayerAutoShoot : MonoBehaviour
 
     private void FindNearestEnemy()
     {
+        
         enemyList = GameObject.FindGameObjectsWithTag("Enemy");
         
 

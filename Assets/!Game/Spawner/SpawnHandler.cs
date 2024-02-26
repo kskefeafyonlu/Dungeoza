@@ -1,8 +1,5 @@
 using System.Collections;
 using TMPro;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
 
 
@@ -33,11 +30,17 @@ public class SpawnHandler : MonoBehaviour
 
     public float timeBetweenWaves = 5f;
     public float waveCountDown;
+    int waveCountDownInt;
+    private TextMeshProUGUI waveSecondsText;
+
 
     public Transform[] spawnPositions;
 
     private TextMeshProUGUI enemiesLeftText;
     int enemiesLeft;
+    float checkCooldown;
+
+    
 
 
 
@@ -46,6 +49,7 @@ public class SpawnHandler : MonoBehaviour
     {
         waveCountDown = timeBetweenWaves;
         enemiesLeftText = GameObject.Find("EnemiesLeftText").GetComponent<TextMeshProUGUI>();
+        waveSecondsText = GameObject.Find("WaveSecondsText").GetComponent<TextMeshProUGUI>();
     }
 
 
@@ -53,7 +57,7 @@ public class SpawnHandler : MonoBehaviour
     {
         waveCountDown-= Time.deltaTime;
 
-        if (waveList[currentWaveIndex].state == WaveState.OnHold)
+        if (waveList[currentWaveIndex].state == WaveState.OnHold && checkCooldown >= 0.5f)
         {
             //check if any enemies alive
             if(!CheckForAliveEnemies())
@@ -62,6 +66,7 @@ public class SpawnHandler : MonoBehaviour
                 if(waveList.Length > currentWaveIndex+1)
                 {
                     waveList[currentWaveIndex].state = WaveState.Finished;
+                    enemiesLeftText.gameObject.SetActive(false);
                     currentWaveIndex += 1;
                     waveCountDown = timeBetweenWaves;
                     
@@ -74,18 +79,28 @@ public class SpawnHandler : MonoBehaviour
             }
             else
             {
+                
                 return;
             }
+
         }
+        checkCooldown += Time.deltaTime;
         
 
         if (waveCountDown <= 0)
         {
+
             if(waveList[currentWaveIndex].state == WaveState.NotStarted)
             {
                 StartCoroutine(StartWave(waveList[currentWaveIndex]));
             }
             
+        }
+        else
+        {
+            waveSecondsText.gameObject.SetActive(true);
+            waveCountDownInt = (int) (waveCountDown + 0.99f) ;
+            waveSecondsText.text = $"Wave Coming In: {waveCountDownInt}";
         }
     }
 

@@ -5,7 +5,6 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
-    private bool isAlive = true;
 
     private Slider healthSlider;
 
@@ -14,7 +13,6 @@ public class EnemyHealth : MonoBehaviour
     private void Awake() 
     {
         health = maxHealth;
-        isAlive = true;
         healthSlider = GetComponentInChildren<Slider>();
         UpdateHealthBar();
     }
@@ -44,7 +42,6 @@ public class EnemyHealth : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
-            isAlive = false;
             Destroy(gameObject);
         }
         UpdateHealthBar();
