@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 69881984}
   - component: {fileID: 69881983}
   - component: {fileID: 69881982}
+  - component: {fileID: 69881985}
   m_Layer: 5
   m_Name: ItemSelect (1)
   m_TagString: Untagged
@@ -205,7 +206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 69881983}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1213316352}
+        m_TargetAssemblyTypeName: LevelUpScreenManager, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &69881983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +257,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69881980}
   m_CullTransparentMesh: 1
+--- !u!114 &69881985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69881980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c466c8ca30ab548a6e741281a95f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+--- !u!1 &130862756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 130862757}
+  - component: {fileID: 130862758}
+  m_Layer: 0
+  m_Name: InputKeyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &130862757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130862756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1000962698}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &130862758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130862756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b449d7e2666874f9086e21a514e6e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &164496663
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,6 +1559,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718640060}
   m_CullTransparentMesh: 1
+--- !u!1 &756462147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 756462148}
+  - component: {fileID: 756462149}
+  m_Layer: 0
+  m_Name: PauseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &756462148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756462147}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1000962698}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &756462149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756462147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067c7f8f7d2d0b54c938a8cb24d60361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &786779882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1646,7 @@ GameObject:
   - component: {fileID: 817109370}
   - component: {fileID: 817109369}
   - component: {fileID: 817109368}
+  - component: {fileID: 817109371}
   m_Layer: 5
   m_Name: ItemSelect (3)
   m_TagString: Untagged
@@ -1602,7 +1717,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 817109369}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1213316352}
+        m_TargetAssemblyTypeName: LevelUpScreenManager, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &817109369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1641,6 +1768,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817109366}
   m_CullTransparentMesh: 1
+--- !u!114 &817109371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817109366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c466c8ca30ab548a6e741281a95f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!1 &849402123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,7 +1814,7 @@ RectTransform:
   m_Father: {fileID: 457323311}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.539, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1734,7 +1874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &866979113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1987,6 +2127,8 @@ Transform:
   m_Children:
   - {fileID: 333010415}
   - {fileID: 1213316351}
+  - {fileID: 756462148}
+  - {fileID: 130862757}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1055678982
@@ -2106,7 +2248,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1116938552}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1213316352}
+        m_TargetAssemblyTypeName: LevelUpScreenManager, Assembly-CSharp
+        m_MethodName: ContinuePressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1116938552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2157,6 +2311,7 @@ GameObject:
   - component: {fileID: 1124550892}
   - component: {fileID: 1124550891}
   - component: {fileID: 1124550890}
+  - component: {fileID: 1124550893}
   m_Layer: 5
   m_Name: ItemSelect (2)
   m_TagString: Untagged
@@ -2227,7 +2382,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1124550891}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1213316352}
+        m_TargetAssemblyTypeName: LevelUpScreenManager, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1124550891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2266,6 +2433,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124550888}
   m_CullTransparentMesh: 1
+--- !u!114 &1124550893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124550888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c466c8ca30ab548a6e741281a95f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!1 &1213316350
 GameObject:
   m_ObjectHideFlags: 0
@@ -2277,7 +2457,7 @@ GameObject:
   - component: {fileID: 1213316351}
   - component: {fileID: 1213316352}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: LevelScreenManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2307,9 +2487,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1213316350}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ad41090a927c54cb86192a59450273, type: 3}
+  m_Script: {fileID: 11500000, guid: 15065a4d218c2a044bef353635b2746e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelUpCanvasObject: {fileID: 866979112}
+  upgradeDataList:
+  - {fileID: 11400000, guid: e7841c5e4138d044db8c5b3a940ef5c4, type: 2}
+  - {fileID: 11400000, guid: d8916f57803c90447ab272afa97dd28f, type: 2}
+  unlockedUpgradesList: []
+  upgradeButtonList:
+  - {fileID: 69881985}
+  - {fileID: 1124550893}
+  - {fileID: 817109371}
 --- !u!1 &1244988887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2518,7 +2707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1383227630
 MonoBehaviour:
   m_ObjectHideFlags: 0

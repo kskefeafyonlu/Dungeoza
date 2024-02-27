@@ -21,7 +21,6 @@ public class Bullet : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyHealth>().Damage(damage);
         }
-        
     }
 
 

@@ -13,14 +13,15 @@ public class PlayerLevel : MonoBehaviour
     TextMeshProUGUI expText;
 
 
-    private GameObject levelUpCanvasObject;
+    private GameObject levelUpObject;
+
     
 
 
 
     private void Start() 
     {
-        levelUpCanvasObject = GameObject.Find("LevelUpCanvas");
+        levelUpObject = GameObject.Find("LevelScreenManager");
 
         levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
         expText = GameObject.Find("ExpText").GetComponent<TextMeshProUGUI>();
@@ -57,7 +58,8 @@ public class PlayerLevel : MonoBehaviour
             exp = tempExp;
             expThreshold = expThreshold * 1.5f;
             level++;
-            OpenLevelUpScreen();
+            levelUpObject.GetComponent<LevelUpScreenManager>().OpenLevelUpScreen();
+            
 
         }
     }
@@ -72,9 +74,5 @@ public class PlayerLevel : MonoBehaviour
 
 
 
-    private void OpenLevelUpScreen()
-    {
-        levelUpCanvasObject.SetActive(true);
-        Time.timeScale = 0f;
-    }
+    
 }

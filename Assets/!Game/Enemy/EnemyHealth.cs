@@ -3,12 +3,18 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public bool killed = false;
     [SerializeField] private float initialHealth;
-    [SerializeField] private float health;
     [SerializeField] private float maxHealth;
-
+    private float health;
     private Slider healthSlider;
+    
+
     private EnemyLevel levelScript;
+
+    private GameObject player;
+
+    
 
 
 
@@ -16,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
     {
         levelScript = GetComponent<EnemyLevel>();
         healthSlider = GetComponentInChildren<Slider>();
+        player = GameObject.FindWithTag("Player");
     }
 
     void Start()
@@ -39,12 +46,17 @@ public class EnemyHealth : MonoBehaviour
 
 
 
+
+
+
     public void Damage(float amount)
     {
         health -= amount;
         if (health <= 0)
         {
             health = 0;
+            killed = true;
+            player.GetComponent<PlayerLevel>().AddExp(levelScript.expReward);
             Destroy(gameObject);
         }
         UpdateHealthBar();

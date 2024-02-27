@@ -316,8 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6f394d46e082642879a97ed74f14de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killed: 0
   initialHealth: 5
-  health: 5
   maxHealth: 5
 --- !u!114 &9112712171301820044
 MonoBehaviour:
@@ -346,6 +346,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
+  initialExpReward: 5
+  expReward: 1
 --- !u!1 &4035272143550924948
 GameObject:
   m_ObjectHideFlags: 0

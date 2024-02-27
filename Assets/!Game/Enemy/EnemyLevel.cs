@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyLevel : MonoBehaviour
 {
     public int level = 1;
-    private float initialExpReward = 1f;
+    public float initialExpReward = 1f;
+    [HideInInspector]
     public float expReward = 1f;
 
 
