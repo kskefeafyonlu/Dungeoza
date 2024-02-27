@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private Vector2 
+    private Vector2 vector;
 }

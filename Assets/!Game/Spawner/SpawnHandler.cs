@@ -21,6 +21,19 @@ public class SpawnHandler : MonoBehaviour
         public GameObject[] enemyList;
         public int enemyAmount;
         public float spawnRate;
+        public int waveLevel;
+
+        public void UpdateEnemyList()
+        {
+            foreach (GameObject enemyObject in enemyList)
+            {
+                
+                EnemyLevel levelScript = enemyObject.GetComponent<EnemyLevel>();
+                levelScript.level = waveLevel;
+                // levelScript.UpdateEnemyAttributes();
+                Debug.Log(levelScript.level);
+            }
+        }
     }
 
     ///////////////////////
@@ -69,17 +82,12 @@ public class SpawnHandler : MonoBehaviour
                     enemiesLeftText.gameObject.SetActive(false);
                     currentWaveIndex += 1;
                     waveCountDown = timeBetweenWaves;
-                    
                 }
-                else
-                {
+                else{
                     Debug.Log("Reached the end of waveslist");
                 }
-
             }
-            else
-            {
-                
+            else{
                 return;
             }
 
@@ -89,6 +97,7 @@ public class SpawnHandler : MonoBehaviour
 
         if (waveCountDown <= 0)
         {
+            waveSecondsText.gameObject.SetActive(false);
 
             if(waveList[currentWaveIndex].state == WaveState.NotStarted)
             {
@@ -111,6 +120,7 @@ public class SpawnHandler : MonoBehaviour
 
     IEnumerator StartWave(Wave wave)
     {
+        wave.UpdateEnemyList();
         wave.state = WaveState.Spawning;
         enemiesLeftText.gameObject.SetActive(false);
 

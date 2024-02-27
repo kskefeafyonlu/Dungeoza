@@ -3,23 +3,26 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [SerializeField] private float initialHealth;
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
 
     private Slider healthSlider;
+    private EnemyLevel levelScript;
 
 
 
     private void Awake() 
     {
-        health = maxHealth;
+        levelScript = GetComponent<EnemyLevel>();
         healthSlider = GetComponentInChildren<Slider>();
-        UpdateHealthBar();
     }
 
     void Start()
     {
         UpdateHealthBar();
+        UpdateHealthWithLevel();
+        health = maxHealth;
     }
 
     private void Update() 
@@ -58,9 +61,9 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    private void LerpChange()
+    public void UpdateHealthWithLevel()
     {
-
+        maxHealth = initialHealth * levelScript.level;
     }
 
     public void UpdateHealthBar()

@@ -5,8 +5,16 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
 
-    public float damage = 1;
+    public float initialDamage = 1;
+    public float damage;
+    private EnemyLevel levelScript;
 
+
+    private void Awake() 
+    {
+        levelScript = GetComponent<EnemyLevel>();
+        UpdateDamageWithLevel();
+    }
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
@@ -14,6 +22,11 @@ public class EnemyAttack : MonoBehaviour
         {
             other.gameObject.GetComponent<PlayerHealth>().Damage(damage);
         }
+    }
+
+    public void UpdateDamageWithLevel()
+    {
+        damage = initialDamage * levelScript.level;
     }
 }
 
