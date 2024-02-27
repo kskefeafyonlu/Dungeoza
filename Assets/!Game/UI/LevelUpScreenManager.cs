@@ -59,7 +59,7 @@ public class LevelUpScreenManager : MonoBehaviour
     {
         levelUpCanvasObject.SetActive(true);
         SetupButtons();
-        pauseManager.ContiniueGame();
+        pauseManager.PauseGame();
         
     }
 

@@ -32,8 +32,13 @@ public class UpgradeButton : MonoBehaviour
 
     public void SelectedUpgradeButton()
     {
+
         playerLevelScript.upgradesAchieved.Add(upData);
-        levelUpManagerScript.upgradeDataList.Remove(upData);
+        if(upData.upgradeName != "Default Upgrade")
+        {
+            levelUpManagerScript.upgradeDataList.Remove(upData);
+        }
+        
         levelUpManagerScript.ContinuePressed();
 
     }
