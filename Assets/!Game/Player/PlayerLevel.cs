@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ public class PlayerLevel : MonoBehaviour
 {
    
     float exp = 0f;
-    float expThreshold = 100f;
+    float expThreshold = 10f;
     int level = 1;
     Slider expSlider;
     TextMeshProUGUI levelText;
@@ -16,7 +17,7 @@ public class PlayerLevel : MonoBehaviour
     private GameObject levelUpObject;
 
     
-
+    public List<UpgradeData> upgradesAchieved = new List<UpgradeData>();
 
 
     private void Start() 

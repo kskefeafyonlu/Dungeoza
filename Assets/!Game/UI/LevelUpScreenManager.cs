@@ -58,17 +58,25 @@ public class LevelUpScreenManager : MonoBehaviour
     public void OpenLevelUpScreen()
     {
         levelUpCanvasObject.SetActive(true);
-        Time.timeScale = 0f;
         SetupButtons();
+        pauseManager.ContiniueGame();
+        
     }
 
 
     private void SetupButtons()
     {
         //// MAKE IT BETTER
-        for (int i = 0; i < upgradeDataList.Count; i++)
+        if(upgradeDataList.Count == 0)
         {
-            upgradeButtonList[i].Set(upgradeDataList[i]);
+            foreach(UpgradeButton button in upgradeButtonList)
+            {
+                button.Set(upgradeDataList[0]);
+            }
+        }
+        for (int i = 1; i < upgradeDataList.Count + 1; i++)
+        {
+            upgradeButtonList[i - 1].Set(upgradeDataList[i - 1]);
         }
     }
 
@@ -79,8 +87,5 @@ public class LevelUpScreenManager : MonoBehaviour
 
 
 
-    public void Upgrade(int id)
-    {
-
-    }
+    
 }

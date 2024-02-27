@@ -27,9 +27,10 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
-        UpdateHealthBar();
+        
         UpdateHealthWithLevel();
         health = maxHealth;
+        UpdateHealthBar();
     }
 
     private void Update() 
@@ -76,6 +77,7 @@ public class EnemyHealth : MonoBehaviour
     public void UpdateHealthWithLevel()
     {
         maxHealth = initialHealth * levelScript.level;
+        UpdateHealthBar();
     }
 
     public void UpdateHealthBar()
