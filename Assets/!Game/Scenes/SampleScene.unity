@@ -3240,14 +3240,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7127786564223479554, guid: 49ab00e404aac704590b94894b786889, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 7127786564223479554, guid: 49ab00e404aac704590b94894b786889, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.07
-      objectReference: {fileID: 0}
+    - target: {fileID: 6195778206982147141, guid: 49ab00e404aac704590b94894b786889, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 2305588224007791622, guid: b214f4df4daee6043bfa74129eef0051, type: 3}
     - target: {fileID: 8189252591424849539, guid: 49ab00e404aac704590b94894b786889, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

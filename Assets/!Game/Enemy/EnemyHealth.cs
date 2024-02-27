@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public bool killed = false;
     [SerializeField] private float initialHealth;
     [SerializeField] private float maxHealth;
     private float health;
@@ -56,7 +55,6 @@ public class EnemyHealth : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
-            killed = true;
             player.GetComponent<PlayerLevel>().AddExp(levelScript.expReward);
             Destroy(gameObject);
         }
