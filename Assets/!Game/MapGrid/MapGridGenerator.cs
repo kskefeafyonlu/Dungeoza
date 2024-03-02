@@ -21,6 +21,14 @@ public class MapGridGenerator : MonoBehaviour
         CreateEntryRoom();
     }
 
+
+    private void Update() 
+    {
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            CreateEntryRoom();
+        }
+    }
     
 
 
@@ -29,8 +37,8 @@ public class MapGridGenerator : MonoBehaviour
     public void CreateEntryRoom()
     {
         int randomIndex = Random.Range(0, roomPrefabs.Length);
-        selectedMapGrid = roomPrefabs[randomIndex].GetComponent<MapGrid>();
-
+        GameObject selectedPrefab = roomPrefabs[randomIndex];
+        
         int entrySpawnBlockX = (int)(gridX / 3f);
         int entrySpawnBlockY = (int)(gridY / 3f);
 
@@ -42,6 +50,11 @@ public class MapGridGenerator : MonoBehaviour
         Debug.Log($"x: {randomXPos}    y: {randomYPos}");
         Debug.Log(mapGridArray);
 
+
+
+
+        Instantiate(selectedPrefab, new Vector3(randomXPos, randomYPos, 0), Quaternion.identity);
+        selectedMapGrid = selectedPrefab.GetComponent<MapGrid>();
     }
 
 

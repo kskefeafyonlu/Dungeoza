@@ -11,5 +11,5 @@ public class MapGrid : MonoBehaviour
     public bool hasDownExit = false;
     public bool hasLeftExit = false;
 
-    
+        
 }
