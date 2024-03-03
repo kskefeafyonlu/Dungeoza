@@ -5,6 +5,8 @@ public class MapGridGenerator : MonoBehaviour
 {
     bool entryRoomCreated = false;
 
+    public GameObject highlighter;
+
     public int gridX = 9;
     public int gridY = 9;
 
@@ -13,9 +15,12 @@ public class MapGridGenerator : MonoBehaviour
 
     public Vector2Int lastSelectedIndex = new Vector2Int(0, 0);
     public Vector2Int tempSelectedIndex;
+    Vector2Int temptemp;
 
 
     public GameObject[] roomPrefabs;
+
+
 
 
 
@@ -28,6 +33,9 @@ public class MapGridGenerator : MonoBehaviour
 
     private void Update()
     {
+        highlighter.transform.position = new Vector3(tempSelectedIndex.x, tempSelectedIndex.y, 0);
+        
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (entryRoomCreated)
@@ -40,7 +48,7 @@ public class MapGridGenerator : MonoBehaviour
             }
 
         }
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             RotateLastPlacedRoom();
         }
@@ -55,14 +63,14 @@ public class MapGridGenerator : MonoBehaviour
 
     private void RotateALl()
     {
-        foreach(MapGrid room in mapGridArray)
+        foreach (MapGrid room in mapGridArray)
         {
-            if(room != null)
+            if (room != null)
             {
                 room.GetRotated();
 
             }
-            
+
         }
     }
 
@@ -98,7 +106,7 @@ public class MapGridGenerator : MonoBehaviour
         Debug.Log($"x: {randomXPos}    y: {randomYPos}");
 
 
-        
+
 
         InstantiateRoom(new Vector2Int(randomXPos, randomYPos));
 
@@ -127,27 +135,25 @@ public class MapGridGenerator : MonoBehaviour
 
     private void InstantiateRoom(Vector2Int ind)
     {
-        Debug.Log("Initializing at " + ind.x + ind.y);
-
-        int randomIndex = Random.Range(0, roomPrefabs.Length);
-        GameObject selectedPrefab = roomPrefabs[randomIndex];
-
-        
-        GameObject instantiatedRoom = Instantiate(selectedPrefab, new Vector3(ind.x, ind.y, 0), Quaternion.identity);
-
-        mapGridArray[ind.x, ind.y] = instantiatedRoom.GetComponent<MapGrid>();
-
-
-        lastSelectedIndex = ind;
-
-        for(int x = 0; x < mapGridArray.GetLength(0); x ++)
+        if(mapGridArray[ind.x, ind.y] == null)
         {
-            for(int y = 0; y < mapGridArray.GetLength(1); y ++)
-            {
-                Debug.Log($"MapGridArray x:{x} y:{y} {mapGridArray[x, y] }");
-            }
+            Debug.Log("Initializing at " + ind.x + ind.y);
+
+            int randomIndex = Random.Range(0, roomPrefabs.Length);
+            GameObject selectedPrefab = roomPrefabs[randomIndex];
+
+
+            GameObject instantiatedRoom = Instantiate(selectedPrefab, new Vector3(ind.x, ind.y, 0), Quaternion.identity);
+
+            mapGridArray[ind.x, ind.y] = instantiatedRoom.GetComponent<MapGrid>();
+
+
+            lastSelectedIndex = ind;
+
+            
         }
         
+
     }
 
 
@@ -163,29 +169,41 @@ public class MapGridGenerator : MonoBehaviour
     private void MoveIndexToAvailableGrid(Vector2Int ind)
     {
         MapGrid room = GetRoomFromIndex(ind);
-        int randomIndex = Random.Range(0, room.availableList.Count);
-        Movability randomPos = room.availableList[randomIndex];
-        Debug.Log(randomPos);
-
-        switch (randomPos)
+        Movability randomPos;
+        
+        if (room.availableList.Count > 0)
         {
-            case Movability.Up:
-                tempSelectedIndex = new Vector2Int(lastSelectedIndex.x, lastSelectedIndex.y + 1);
-                Debug.Log("UpSelected");
-                return;
-            case Movability.Down:
-                tempSelectedIndex = new Vector2Int(lastSelectedIndex.x, lastSelectedIndex.y - 1);
-                Debug.Log("DownSelected");
-                return;
-            case Movability.Right:
-                tempSelectedIndex = new Vector2Int(lastSelectedIndex.x + 1, lastSelectedIndex.y);
-                Debug.Log("RightSelected");
-                return;
-            case Movability.Left:
-                tempSelectedIndex = new Vector2Int(lastSelectedIndex.x - 1, lastSelectedIndex.y);
-                Debug.Log("LeftSelected");
-                return;
+            int randomIndex = Random.Range(0, room.availableList.Count);
+            randomPos = room.availableList[randomIndex];
+            Debug.Log(randomPos);
+
+            
+            switch (randomPos)
+            {
+                case Movability.Up:
+                    temptemp = tempSelectedIndex;
+                    tempSelectedIndex = new Vector2Int(lastSelectedIndex.x, lastSelectedIndex.y + 1);
+                    Debug.Log("UpSelected");
+                    return;
+                case Movability.Down:
+                    temptemp = tempSelectedIndex;
+                    tempSelectedIndex = new Vector2Int(lastSelectedIndex.x, lastSelectedIndex.y - 1);
+                    Debug.Log("DownSelected");
+                    return;
+                case Movability.Right:
+                    temptemp = tempSelectedIndex;
+                    tempSelectedIndex = new Vector2Int(lastSelectedIndex.x + 1, lastSelectedIndex.y);
+                    Debug.Log("RightSelected");
+                    return;
+                case Movability.Left:
+                    temptemp = tempSelectedIndex;
+                    tempSelectedIndex = new Vector2Int(lastSelectedIndex.x - 1, lastSelectedIndex.y);
+                    Debug.Log("LeftSelected");
+                    return;
+            }
+            Debug.Log("sa");
         }
+
     }
 
 
@@ -196,22 +214,22 @@ public class MapGridGenerator : MonoBehaviour
         MapGrid room = GetRoomFromIndex(ind);
         room.availableList = new List<Movability>();
 
-        if (room.hasUpExit && ind.y < gridY)
+        if (room.hasUpExit && ind.y < gridY - 1)
         {
             room.upAvailability = true;
             room.availableList.Add(Movability.Up);
         }
-        if (room.hasDownExit && ind.y > 1)
+        if (room.hasDownExit && ind.y > 0)
         {
             room.downAvailability = true;
             room.availableList.Add(Movability.Down);
         }
-        if (room.hasRightExit && ind.x < gridX)
+        if (room.hasRightExit && ind.x < gridX - 1)
         {
             room.rightAvailability = true;
             room.availableList.Add(Movability.Right);
         }
-        if (room.hasLeftExit && ind.x > 1)
+        if (room.hasLeftExit && ind.x > 0)
         {
             room.leftAvailability = true;
             room.availableList.Add(Movability.Left);
