@@ -152,12 +152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff67f6b12a2f7546bfb44cb0d0727d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridX: 9
-  gridY: 9
+  gridX: 13
+  gridY: 13
   gridBackGroundPrefab: {fileID: 2494146520980857095, guid: 46bb44f97623fe048a95146cd7727ba4, type: 3}
+  lastSelectedIndex: {x: 0, y: 0}
+  tempSelectedIndex: {x: 0, y: 0}
   roomPrefabs:
   - {fileID: 3644256422912754198, guid: 947ebb2e6225bd240ba39a5319c70326, type: 3}
-  selectedMapGrid: {fileID: 0}
 --- !u!4 &723233599
 Transform:
   m_ObjectHideFlags: 0
@@ -234,7 +235,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

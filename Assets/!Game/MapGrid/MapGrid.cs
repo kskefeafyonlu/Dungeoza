@@ -3,6 +3,15 @@ using UnityEngine;
 
 public class MapGrid : MonoBehaviour
 {
+    public List<Movability> availableList = new List<Movability>();
+
+    public bool upAvailability = false;
+    public bool rightAvailability = false;
+    public bool downAvailability = false;
+    public bool leftAvailability = false;
+
+
+
     public int length = 5;
     public int height = 5;
 
@@ -36,11 +45,13 @@ public class MapGrid : MonoBehaviour
         transform.rotation = transform.rotation * rotationAmount;
     }
 
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            GetRotated();
-        }
-    }
-
 }
+
+public enum Movability
+{
+    Up,
+    Right,
+    Down,
+    Left
+}
+
