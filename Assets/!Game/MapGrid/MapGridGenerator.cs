@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGridGenerator : MonoBehaviour
@@ -9,9 +10,13 @@ public class MapGridGenerator : MonoBehaviour
     public MapGrid[,] mapGridArray;
     public GameObject gridBackGroundPrefab;
 
+    public Vector2Int lastSelectedIndex = new Vector2Int(0, 0);
+
 
     public GameObject[] roomPrefabs;
     public MapGrid selectedMapGrid;
+
+
 
 
     private void Start()
@@ -51,6 +56,13 @@ public class MapGridGenerator : MonoBehaviour
 
 
 
+    private MapGrid GetRoomFromIndex(Vector2Int index)
+    {
+        MapGrid toReturn = mapGridArray[index.x, index.y];
+        return toReturn;
+    }
+
+
 
     public void CreateEntryRoom()
     {
@@ -70,16 +82,27 @@ public class MapGridGenerator : MonoBehaviour
 
 
         Instantiate(selectedPrefab, new Vector3(randomXPos, randomYPos, 0), Quaternion.identity);
+        lastSelectedIndex = new Vector2Int(randomXPos, randomYPos);
+
         selectedMapGrid = selectedPrefab.GetComponent<MapGrid>();
     }
 
 
 
+
+
     public void CreateLinkedRoom()
     {
+        List<GameObject> availableRooms = new List<GameObject>();
+        MapGrid lastSelectedRoom = GetRoomFromIndex(lastSelectedIndex);
+
+
         
     }
-
 }
+
+
+
+
 
 

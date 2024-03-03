@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGrid : MonoBehaviour
@@ -5,41 +6,41 @@ public class MapGrid : MonoBehaviour
     public int length = 5;
     public int height = 5;
 
-""""
-   public bool hasUpExit = false;
+
+    public bool hasUpExit = false;
     public bool hasRightExit = false;
     public bool hasDownExit = false;
     public bool hasLeftExit = false;
-""""
 
-    public ArrayList arrlist = new ArrayList(bool hasUpExit, bool hasRightExit, bool hasDownExit, bool hasLeftExit)
 
+    private Quaternion rotationAmount = Quaternion.Euler(0, 0, -90);
+    
 
 
     public void GetRotated()
     {
-        bool extraExit = false;
-        int a = 0;
-        foreach (bool i in arrlist)
+        List<bool> tempList = new List<bool>
         {
-            if(a==4)
-            {
-                if(arrlist[0]==true)
-            }
-            else if (i == true)
-            {
-                if (arrlist[a + 1] == true) { extraExit = true; }
-                i + 1 = true;
-            }
-            else if (extraExit == true)
-            {
-                if (arrlist[a + 1] == false) { extraExit = false; }
-                i + 1 = true;
-            }
-            a++;
+            hasUpExit,
+            hasRightExit,
+            hasDownExit,
+            hasLeftExit
+        };
+
+        hasUpExit = tempList[3];
+        hasRightExit = tempList[0];
+        hasDownExit = tempList[1];
+        hasLeftExit = tempList[2];
+
+
+        transform.rotation = transform.rotation * rotationAmount;
+    }
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            GetRotated();
         }
-
-
     }
 
 }
