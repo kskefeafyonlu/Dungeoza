@@ -214,22 +214,22 @@ public class MapGridGenerator : MonoBehaviour
         MapGrid room = GetRoomFromIndex(ind);
         room.availableList = new List<Movability>();
 
-        if (room.hasUpExit && ind.y < gridY - 1)
+        if (room.hasUpExit && ind.y < gridY - 1 && mapGridArray[ind.x, ind.y + 1] == null)
         {
             room.upAvailability = true;
             room.availableList.Add(Movability.Up);
         }
-        if (room.hasDownExit && ind.y > 0)
+        if (room.hasDownExit && ind.y > 0 && mapGridArray[ind.x, ind.y - 1] == null)
         {
             room.downAvailability = true;
             room.availableList.Add(Movability.Down);
         }
-        if (room.hasRightExit && ind.x < gridX - 1)
+        if (room.hasRightExit && ind.x < gridX - 1 && mapGridArray[ind.x + 1, ind.y] == null)
         {
             room.rightAvailability = true;
             room.availableList.Add(Movability.Right);
         }
-        if (room.hasLeftExit && ind.x > 0)
+        if (room.hasLeftExit && ind.x > 0 && mapGridArray[ind.x - 1, ind.y] == null)
         {
             room.leftAvailability = true;
             room.availableList.Add(Movability.Left);
