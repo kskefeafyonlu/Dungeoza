@@ -98,17 +98,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a56ca2d511d53ce43b338634eefefcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableList: 
+  availableList: 00000000
   upAvailability: 0
-  rightAvailability: 1
-  downAvailability: 1
-  leftAvailability: 1
+  rightAvailability: 0
+  downAvailability: 0
+  leftAvailability: 0
   length: 4
   height: 4
-  hasUpExit: 0
+  hasUpExit: 1
   hasRightExit: 0
   hasDownExit: 0
-  hasLeftExit: 1
+  hasLeftExit: 0
 --- !u!1001 &3551633230289360265
 PrefabInstance:
   m_ObjectHideFlags: 0

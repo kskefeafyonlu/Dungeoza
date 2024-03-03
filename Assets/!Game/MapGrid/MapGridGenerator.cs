@@ -42,12 +42,16 @@ public class MapGridGenerator : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.R))
         {
-            RotateALl();
+            RotateLastPlacedRoom();
         }
 
     }
-    
 
+    private void RotateLastPlacedRoom()
+    {
+        MapGrid room = mapGridArray[lastSelectedIndex.x, lastSelectedIndex.y];
+        room.GetRotated();
+    }
 
     private void RotateALl()
     {
@@ -56,6 +60,7 @@ public class MapGridGenerator : MonoBehaviour
             if(room != null)
             {
                 room.GetRotated();
+
             }
             
         }
@@ -83,23 +88,21 @@ public class MapGridGenerator : MonoBehaviour
 
     public void CreateEntryRoom()
     {
-        int randomIndex = Random.Range(0, roomPrefabs.Length);
-        GameObject selectedPrefab = roomPrefabs[randomIndex];
+
 
         int entrySpawnBlockX = (int)(gridX / 3f);
         int entrySpawnBlockY = (int)(gridY / 3f);
 
         int randomXPos = Random.Range(entrySpawnBlockY, gridX - entrySpawnBlockX);
         int randomYPos = Random.Range(entrySpawnBlockY, gridY - entrySpawnBlockY);
-
-        mapGridArray[randomXPos, randomYPos] = selectedPrefab.GetComponent<MapGrid>();
-
         Debug.Log($"x: {randomXPos}    y: {randomYPos}");
 
 
-        Instantiate(selectedPrefab, new Vector3(randomXPos, randomYPos, 0), Quaternion.identity);
-        lastSelectedIndex = new Vector2Int(randomXPos, randomYPos);
+        
 
+        InstantiateRoom(new Vector2Int(randomXPos, randomYPos));
+
+        lastSelectedIndex = new Vector2Int(randomXPos, randomYPos);
 
         entryRoomCreated = true;
     }
@@ -129,8 +132,11 @@ public class MapGridGenerator : MonoBehaviour
         int randomIndex = Random.Range(0, roomPrefabs.Length);
         GameObject selectedPrefab = roomPrefabs[randomIndex];
 
-        mapGridArray[ind.x, ind.y] = selectedPrefab.GetComponent<MapGrid>();
-        Instantiate(selectedPrefab, new Vector3(ind.x, ind.y, 0), Quaternion.identity);
+        
+        GameObject instantiatedRoom = Instantiate(selectedPrefab, new Vector3(ind.x, ind.y, 0), Quaternion.identity);
+
+        mapGridArray[ind.x, ind.y] = instantiatedRoom.GetComponent<MapGrid>();
+
 
         lastSelectedIndex = ind;
 
