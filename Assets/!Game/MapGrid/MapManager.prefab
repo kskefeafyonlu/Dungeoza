@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4795113842281656198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2586918819612350895}
+  - component: {fileID: 5081510150204755014}
+  m_Layer: 0
+  m_Name: MapManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2586918819612350895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4795113842281656198}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5081510150204755014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4795113842281656198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff67f6b12a2f7546bfb44cb0d0727d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlighter: {fileID: 0}
+  gridX: 13
+  gridY: 13
+  gridBackGroundPrefab: {fileID: 2494146520980857095, guid: 46bb44f97623fe048a95146cd7727ba4, type: 3}
+  lastSelectedIndex: {x: 0, y: 0}
+  tempSelectedIndex: {x: 0, y: 0}
+  roomPrefabs:
+  - {fileID: 3644256422912754198, guid: 947ebb2e6225bd240ba39a5319c70326, type: 3}
+  - {fileID: 2892223584977525224, guid: 2febd42f5fbada14283059dc589ef02f, type: 3}
+  - {fileID: 5949699934324587314, guid: 8bd87e04dc4854357a28ec65f85aea78, type: 3}
+  - {fileID: 2977829764812341236, guid: 87b9502954b4e455abaa981858a135ed, type: 3}
+  - {fileID: 4435563182808035312, guid: b33dcae105cdb4c9da18061664c9e3bf, type: 3}
