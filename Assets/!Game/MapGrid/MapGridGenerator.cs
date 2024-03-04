@@ -211,22 +211,56 @@ public class MapGridGenerator : MonoBehaviour
 
             foreach(Movability x in room.linksList)
             {
+                
                 if (x == Movability.Up)
                 {
-                    room.linksList.Remove(Movability.Up);
+                    Debug.Log("lalalala");
+                    if(mapGridArray[lastSelectedIndex.x, lastSelectedIndex.y + 1].linksFinished)
+                    {
+                        room.linksList.Remove(Movability.Up);
+                    }
+                    else{
+                        tempSelectedIndex.y +=1;
+                    }
+                    
                 }
+
                 else if (x == Movability.Right)
                 {
-                    room.linksList.Remove(Movability.Right);
+                    Debug.Log("lalalala");
+                    if(mapGridArray[lastSelectedIndex.x + 1, lastSelectedIndex.y].linksFinished)
+                    {
+                        room.linksList.Remove(Movability.Right);
+                    }
+                    else{
+                        tempSelectedIndex.x +=1;
+                    }
                 }
+
                 else if (x == Movability.Down)
                 {
-                    room.linksList.Remove(Movability.Down);
+                    Debug.Log("lalalala");
+                    if(mapGridArray[lastSelectedIndex.x, lastSelectedIndex.y -1].linksFinished)
+                    {
+                        room.linksList.Remove(Movability.Down);
+                    }
+                    else{
+                        tempSelectedIndex.y -=1;
+                    }
                 }
+
                 else if (x == Movability.Left)
                 {
-                    room.linksList.Remove(Movability.Left);
+                    Debug.Log("lalalala");
+                    if(mapGridArray[lastSelectedIndex.x - 1, lastSelectedIndex.y].linksFinished)
+                    {
+                        room.linksList.Remove(Movability.Left);
+                    }
+                    else{
+                        tempSelectedIndex.x -=1;
+                    }
                 }
+
             }
         }
     }
