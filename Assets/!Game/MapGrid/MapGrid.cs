@@ -4,6 +4,13 @@ using UnityEngine;
 public class MapGrid : MonoBehaviour
 {
     public List<Movability> availableList = new List<Movability>();
+    
+
+    public bool upLinked = false;
+    public bool rightLinked = false;
+    public bool downLinked = false;
+    public bool leftLinked = false;
+    
 
     public bool upAvailability = false;
     public bool rightAvailability = false;

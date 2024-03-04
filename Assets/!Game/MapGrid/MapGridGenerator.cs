@@ -27,7 +27,6 @@ public class MapGridGenerator : MonoBehaviour
     private void Start()
     {
         InitializeGrid();
-        Debug.Log($" {mapGridArray.GetLength(0)}  {mapGridArray.GetLength(1)}");
     }
 
 
@@ -103,7 +102,6 @@ public class MapGridGenerator : MonoBehaviour
 
         int randomXPos = Random.Range(entrySpawnBlockY, gridX - entrySpawnBlockX);
         int randomYPos = Random.Range(entrySpawnBlockY, gridY - entrySpawnBlockY);
-        Debug.Log($"x: {randomXPos}    y: {randomYPos}");
 
 
 
@@ -137,7 +135,6 @@ public class MapGridGenerator : MonoBehaviour
     {
         if(mapGridArray[ind.x, ind.y] == null)
         {
-            Debug.Log("Initializing at " + ind.x + ind.y);
 
             int randomIndex = Random.Range(0, roomPrefabs.Length);
             GameObject selectedPrefab = roomPrefabs[randomIndex];
@@ -175,7 +172,6 @@ public class MapGridGenerator : MonoBehaviour
         {
             int randomIndex = Random.Range(0, room.availableList.Count);
             randomPos = room.availableList[randomIndex];
-            Debug.Log(randomPos);
 
             
             switch (randomPos)
@@ -214,25 +210,79 @@ public class MapGridGenerator : MonoBehaviour
         MapGrid room = GetRoomFromIndex(ind);
         room.availableList = new List<Movability>();
 
-        if (room.hasUpExit && ind.y < gridY - 1 && mapGridArray[ind.x, ind.y + 1] == null)
+        if (room.hasUpExit && ind.y < gridY && (mapGridArray[ind.x, ind.y + 1] == null || mapGridArray[ind.x, ind.y + 1].hasDownExit == true))
         {
-            room.upAvailability = true;
-            room.availableList.Add(Movability.Up);
+            if(mapGridArray[ind.x, ind.y + 1] != null)
+            {
+                if(mapGridArray[ind.x, ind.y + 1].hasDownExit == true)
+                {
+                    room.upLinked = true;
+                    mapGridArray[ind.x, ind.y + 1].downLinked = true;
+                }
+            }
+            else
+            {
+                room.upAvailability = true;
+                room.availableList.Add(Movability.Up);
+            }
         }
-        if (room.hasDownExit && ind.y > 0 && mapGridArray[ind.x, ind.y - 1] == null)
+
+        if (room.hasDownExit && ind.y > 0 && (mapGridArray[ind.x, ind.y - 1] == null || mapGridArray[ind.x, ind.y - 1].hasUpExit == true))
         {
-            room.downAvailability = true;
-            room.availableList.Add(Movability.Down);
+            if(mapGridArray[ind.x, ind.y - 1] != null)
+            {
+                if(mapGridArray[ind.x, ind.y - 1].hasUpExit == true)
+                {
+                    room.downLinked = true;
+                    mapGridArray[ind.x, ind.y - 1].upLinked = true;
+                }
+            }
+            else
+            {
+                room.downAvailability = true;
+                room.availableList.Add(Movability.Down);
+            }
+            
         }
-        if (room.hasRightExit && ind.x < gridX - 1 && mapGridArray[ind.x + 1, ind.y] == null)
+
+        if (room.hasRightExit && ind.x < gridX - 1 && (mapGridArray[ind.x + 1, ind.y] == null || mapGridArray[ind.x + 1, ind.y].hasLeftExit == true))
         {
-            room.rightAvailability = true;
-            room.availableList.Add(Movability.Right);
+            if(mapGridArray[ind.x + 1, ind.y] != null)
+            {
+                if(mapGridArray[ind.x + 1, ind.y].hasLeftExit == true)
+                {
+                    Debug.Log("rightlink");
+                    room.rightLinked = true;
+                    mapGridArray[ind.x + 1, ind.y].leftLinked = true;
+                }
+            }
+            else
+            {
+                room.rightAvailability = true;
+                room.availableList.Add(Movability.Right);
+            }
+
         }
-        if (room.hasLeftExit && ind.x > 0 && mapGridArray[ind.x - 1, ind.y] == null)
+
+        if (room.hasLeftExit && ind.x > 0 && (mapGridArray[ind.x - 1, ind.y] == null || mapGridArray[ind.x - 1, ind.y].hasRightExit == true))
         {
-            room.leftAvailability = true;
-            room.availableList.Add(Movability.Left);
+            if(mapGridArray[ind.x - 1, ind.y] != null)
+            {
+                Debug.Log("sa");
+                if(mapGridArray[ind.x - 1, ind.y].hasRightExit == true)
+                {
+                    Debug.Log("leflink");
+                    room.leftLinked = true;
+                    mapGridArray[ind.x - 1, ind.y].rightLinked = true;
+                }
+            }
+            else
+            {
+                Debug.Log("as");
+                room.leftAvailability = true;
+                room.availableList.Add(Movability.Left);
+            }
+
         }
     }
 

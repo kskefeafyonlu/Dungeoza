@@ -34,3 +34,6 @@ public class PlayerMovement : MonoBehaviour
             //böylece hem vektörün büyüklüğü hızı etkilememiş de oldu yani <3
     }
 }
+
+
+
