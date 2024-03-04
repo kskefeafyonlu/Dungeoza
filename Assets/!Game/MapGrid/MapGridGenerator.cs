@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapGridGenerator : MonoBehaviour
@@ -67,6 +68,7 @@ public class MapGridGenerator : MonoBehaviour
             if (room != null)
             {
                 room.GetRotated();
+                
 
             }
 
@@ -121,7 +123,7 @@ public class MapGridGenerator : MonoBehaviour
         MapGrid lastSelectedRoom = GetRoomFromIndex(lastSelectedIndex);
 
         CheckRoadAvailability(lastSelectedIndex);
-        MoveIndexToAvailableGrid(lastSelectedIndex);
+        MoveIndexToAvailableGrid();
         InstantiateRoom(tempSelectedIndex);
 
 
@@ -149,8 +151,8 @@ public class MapGridGenerator : MonoBehaviour
 
             
         }
-        
-
+        //while()
+        //rotate
     }
 
 
@@ -163,8 +165,10 @@ public class MapGridGenerator : MonoBehaviour
 
 
 
-    private void MoveIndexToAvailableGrid(Vector2Int ind)
+
+    private void MoveIndexToAvailableGrid()
     {
+        Vector2Int ind = lastSelectedIndex;
         MapGrid room = GetRoomFromIndex(ind);
         Movability randomPos;
         
@@ -197,9 +201,34 @@ public class MapGridGenerator : MonoBehaviour
                     Debug.Log("LeftSelected");
                     return;
             }
-            Debug.Log("sa");
         }
+        else if(room.linksFinished)
+        {
 
+
+
+
+
+            foreach(Movability x in room.linksList)
+            {
+                if (x == Movability.Up)
+                {
+                    room.linksList.Remove(Movability.Up);
+                }
+                else if (x == Movability.Right)
+                {
+                    room.linksList.Remove(Movability.Right);
+                }
+                else if (x == Movability.Down)
+                {
+                    room.linksList.Remove(Movability.Down);
+                }
+                else if (x == Movability.Left)
+                {
+                    room.linksList.Remove(Movability.Left);
+                }
+            }
+        }
     }
 
 
@@ -218,6 +247,11 @@ public class MapGridGenerator : MonoBehaviour
                 {
                     room.upLinked = true;
                     mapGridArray[ind.x, ind.y + 1].downLinked = true;
+
+                    if(room.availableList.Contains(Movability.Up))
+                    {
+                        room.availableList.Remove(Movability.Up);
+                    }
                 }
             }
             else
@@ -235,6 +269,10 @@ public class MapGridGenerator : MonoBehaviour
                 {
                     room.downLinked = true;
                     mapGridArray[ind.x, ind.y - 1].upLinked = true;
+                    if(room.availableList.Contains(Movability.Down))
+                    {
+                        room.availableList.Remove(Movability.Down);
+                    }
                 }
             }
             else
@@ -251,9 +289,14 @@ public class MapGridGenerator : MonoBehaviour
             {
                 if(mapGridArray[ind.x + 1, ind.y].hasLeftExit == true)
                 {
-                    Debug.Log("rightlink");
+                    
                     room.rightLinked = true;
                     mapGridArray[ind.x + 1, ind.y].leftLinked = true;
+
+                    if(room.availableList.Contains(Movability.Right))
+                    {
+                        room.availableList.Remove(Movability.Right);
+                    }
                 }
             }
             else
@@ -268,24 +311,44 @@ public class MapGridGenerator : MonoBehaviour
         {
             if(mapGridArray[ind.x - 1, ind.y] != null)
             {
-                Debug.Log("sa");
+                
                 if(mapGridArray[ind.x - 1, ind.y].hasRightExit == true)
                 {
-                    Debug.Log("leflink");
+                    
                     room.leftLinked = true;
                     mapGridArray[ind.x - 1, ind.y].rightLinked = true;
+
+                    if(room.availableList.Contains(Movability.Left))
+                    {
+                        room.availableList.Remove(Movability.Left);
+                    }
                 }
             }
             else
             {
-                Debug.Log("as");
+                ;
                 room.leftAvailability = true;
                 room.availableList.Add(Movability.Left);
             }
 
         }
+        room.AddLinksToList();
+
+        if(room.availableList.Count == 0)
+        {
+            room.linksFinished = true;
+        }
+
+        ///////////////////////////////////////////
+        ///
+        
     }
 
+
+    private void GoToLinkedRoom(MapGrid currentRoom)
+    {
+        
+    }
 
 }
 

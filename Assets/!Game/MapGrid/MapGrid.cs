@@ -4,7 +4,10 @@ using UnityEngine;
 public class MapGrid : MonoBehaviour
 {
     public List<Movability> availableList = new List<Movability>();
+    public List<Movability> linksList = new List<Movability>();
     
+
+    public bool linksFinished;
 
     public bool upLinked = false;
     public bool rightLinked = false;
@@ -32,6 +35,27 @@ public class MapGrid : MonoBehaviour
     private Quaternion rotationAmount = Quaternion.Euler(0, 0, -90);
     
 
+    public void AddLinksToList()
+    {
+        linksList = new List<Movability>();
+        if(upLinked)
+        {
+            linksList.Add(Movability.Up);
+        }
+        if(rightLinked)
+        {
+            linksList.Add(Movability.Right);
+        }
+        if(downLinked)
+        {
+            linksList.Add(Movability.Down);
+        }
+        if(leftLinked)
+        {
+            linksList.Add(Movability.Left);
+        }
+        
+    }
 
     public void GetRotated()
     {
