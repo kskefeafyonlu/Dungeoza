@@ -123,12 +123,14 @@ public class MapGridGenerator : MonoBehaviour
         List<GameObject> availableRooms = new List<GameObject>();
         MapGrid lastSelectedRoom = GetRoomFromIndex(lastSelectedIndex);
 
+
+
         CheckRoadAvailability(lastSelectedIndex);
         MoveIndexToAvailableGrid();
         InstantiateRoom(tempSelectedIndex);
 
-
         lastSelectedIndex = tempSelectedIndex;
+
     }
 
 
@@ -202,6 +204,7 @@ public class MapGridGenerator : MonoBehaviour
                     Debug.Log("LeftSelected");
                     return;
             }
+            lastSelectedIndex = tempSelectedIndex;
         }
         else if(room.linksFinished)
         {
@@ -211,51 +214,26 @@ public class MapGridGenerator : MonoBehaviour
                 
                 if (x == Movability.Up)
                 {
-                    Debug.Log("lalalala");
-                    if(mapGridArray[lastSelectedIndex.x, lastSelectedIndex.y + 1].linksFinished)
-                    {
-                        room.linksList.Remove(Movability.Up);
-                    }
-                    else{
-                        tempSelectedIndex.y +=1;
-                    }
-                    
+                    tempSelectedIndex.y +=1;
+                    //room.linksList.Remove(Movability.Up);
                 }
 
                 else if (x == Movability.Right)
                 {
-                    Debug.Log("lalalala");
-                    if(mapGridArray[lastSelectedIndex.x + 1, lastSelectedIndex.y].linksFinished)
-                    {
-                        room.linksList.Remove(Movability.Right);
-                    }
-                    else{
-                        tempSelectedIndex.x +=1;
-                    }
+                    tempSelectedIndex.x +=1;
+                    //room.linksList.Remove(Movability.Right);
                 }
 
                 else if (x == Movability.Down)
                 {
-                    Debug.Log("lalalala");
-                    if(mapGridArray[lastSelectedIndex.x, lastSelectedIndex.y -1].linksFinished)
-                    {
-                        room.linksList.Remove(Movability.Down);
-                    }
-                    else{
-                        tempSelectedIndex.y -=1;
-                    }
+                    tempSelectedIndex.y -=1;
+                    //room.linksList.Remove(Movability.Down);
                 }
 
                 else if (x == Movability.Left)
                 {
-                    Debug.Log("lalalala");
-                    if(mapGridArray[lastSelectedIndex.x - 1, lastSelectedIndex.y].linksFinished)
-                    {
-                        room.linksList.Remove(Movability.Left);
-                    }
-                    else{
-                        tempSelectedIndex.x -=1;
-                    }
+                    tempSelectedIndex.x -=1;
+                    //room.linksList.Remove(Movability.Left);
                 }
 
             }
@@ -377,8 +355,6 @@ public class MapGridGenerator : MonoBehaviour
 
 
 }
-
-
 
 
 
