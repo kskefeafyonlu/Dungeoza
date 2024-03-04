@@ -7,7 +7,8 @@ public class MapGrid : MonoBehaviour
     public List<Movability> linksList = new List<Movability>();
     
 
-    public bool linksFinished;
+    public bool linksFinished = false;
+    public bool finalPos = false;
 
     public bool upLinked = false;
     public bool rightLinked = false;

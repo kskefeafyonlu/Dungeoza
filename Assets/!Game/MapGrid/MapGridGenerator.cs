@@ -50,14 +50,15 @@ public class MapGridGenerator : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            RotateLastPlacedRoom();
+            RotateHighlightedPlacedRoom();
         }
 
     }
 
-    private void RotateLastPlacedRoom()
+    private void RotateHighlightedPlacedRoom()
     {
-        MapGrid room = mapGridArray[lastSelectedIndex.x, lastSelectedIndex.y];
+        tempSelectedIndex = lastSelectedIndex;
+        MapGrid room = mapGridArray[tempSelectedIndex.x, tempSelectedIndex.y];
         room.GetRotated();
     }
 
@@ -128,7 +129,6 @@ public class MapGridGenerator : MonoBehaviour
 
 
         lastSelectedIndex = tempSelectedIndex;
-
     }
 
 
@@ -173,6 +173,7 @@ public class MapGridGenerator : MonoBehaviour
         Movability randomPos;
         
         if (room.availableList.Count > 0)
+
         {
             int randomIndex = Random.Range(0, room.availableList.Count);
             randomPos = room.availableList[randomIndex];
@@ -204,10 +205,6 @@ public class MapGridGenerator : MonoBehaviour
         }
         else if(room.linksFinished)
         {
-
-
-
-
 
             foreach(Movability x in room.linksList)
             {
@@ -378,11 +375,6 @@ public class MapGridGenerator : MonoBehaviour
         
     }
 
-
-    private void GoToLinkedRoom(MapGrid currentRoom)
-    {
-        
-    }
 
 }
 

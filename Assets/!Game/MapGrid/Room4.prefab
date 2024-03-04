@@ -114,7 +114,7 @@ MonoBehaviour:
   length: 4
   height: 4
   hasUpExit: 1
-  hasRightExit: 0
+  hasRightExit: 1
   hasDownExit: 1
   hasLeftExit: 0
 --- !u!1001 &1308665795764447972
